@@ -910,7 +910,7 @@ namespace GMAssetCompiler
 			TextureScale = 1;
 			Studio = false;
 
-            ChovyUI.ChovyUI CUI = new ChovyUI.ChovyUI();
+            ChovyUI.MikUI CUI = new ChovyUI.MikUI();
             CUI.ShowDialog();
             TitleID = CUI.GetTitleID();
             string GMPath = CUI.GetGMPath();

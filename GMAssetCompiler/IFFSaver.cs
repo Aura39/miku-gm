@@ -786,8 +786,8 @@ namespace GMAssetCompiler
 					Program.Out.Write("{0} Compressing texture... ", num);
 					Image _dest = null;
 					Bitmap bitmap = texture.Bitmap;
-					byte[] array = Form1.createOutTexture(bitmap, eSquishFlags.kDxt5 | eSquishFlags.kColourMetricPerceptual | eSquishFlags.kClusterFitMaxIteration8, out _dest, Program.TextureType[texture.Group]);
-					string path = Path.Combine(Program.OutputDir, string.Format("texture_{0}{1}", num, Program.TextureTypeExtension(Program.TextureType[texture.Group])));
+					byte[] array = Form1.createOutTexture(bitmap, eSquishFlags.kClusterFitMaxIteration, out _dest, eTexType.e4444);
+					string path = Path.Combine(Program.OutputDir, string.Format("texture_{0}{1}", num, ".png"));
 					Program.Out.WriteLine("writing texture {0}... ", Path.GetFileName(path));
 					if (Program.WriteTextures)
 					{
@@ -879,14 +879,14 @@ namespace GMAssetCompiler
                         Console.WriteLine("Converting " + OriginalName + " To .WAV");
                         File.WriteAllBytes(AudioFile, Sound.Data);
                         Process FluidSynth = new Process();
-                        FluidSynth.StartInfo.FileName = Path.Combine(Application.StartupPath, "fluidsynth.exe");
+                        FluidSynth.StartInfo.FileName = Path.Combine(Application.StartupPath, "buildtools/fluidsynth.exe");
                         FluidSynth.StartInfo.WorkingDirectory = Application.StartupPath;
                         FluidSynth.StartInfo.CreateNoWindow = true;
                         FluidSynth.StartInfo.UseShellExecute = false;
                         FluidSynth.StartInfo.RedirectStandardOutput = true;
                         FluidSynth.StartInfo.RedirectStandardError = true;
                         //Change "gm.sf2" to whatever soundfont you want.
-                        FluidSynth.StartInfo.Arguments = "-F \"" + Path.ChangeExtension(AudioFile, "wav") + "\" \"gm.sf2\" \"" + AudioFile+"\"";
+                        FluidSynth.StartInfo.Arguments = "-F \"" + Path.ChangeExtension(AudioFile, "wav") + "\" \"buildtools/gm.sf2\" \"" + AudioFile+"\"";
                         Console.WriteLine(FluidSynth.StartInfo.FileName + " " + FluidSynth.StartInfo.Arguments);
                         FluidSynth.Start();
                         FluidSynth.WaitForExit();
@@ -918,7 +918,7 @@ namespace GMAssetCompiler
                     String OutputPath = Path.Combine(Program.OutputDir, "_iso_temp", "PSP_GAME", "USRDIR",Path.ChangeExtension(OriginalName,"at3"));
                     Console.WriteLine("Output: " + OutputPath);
                     Process At3Tool = new Process();
-                    At3Tool.StartInfo.FileName = Path.Combine(Application.StartupPath, "at3tool.exe");
+                    At3Tool.StartInfo.FileName = Path.Combine(Application.StartupPath, "buildtools/at3tool.exe");
                     At3Tool.StartInfo.WorkingDirectory = Application.StartupPath;
                     At3Tool.StartInfo.CreateNoWindow = true;
                     At3Tool.StartInfo.UseShellExecute = false;

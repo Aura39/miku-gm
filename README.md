@@ -1,6 +1,6 @@
-# chovy-gm
+# miku-gm
 
-Development moved to: https://silica.codes/SilicaAndPina/chovy-gm
+This is an edit/fork of chovy-gm: https://github.com/LiEnby/chovy-gm
 
 At long last. GameMaker 8.1 to PSP!
 
@@ -19,9 +19,9 @@ the only bugs i can fix are ones relating to compilation, and not running the ga
 
 (ISOs built with this WILL work in Chovy-Sign.)
 
-# Dependancys
-chovy-gm release zip. includes a few other executables
-- at3tool it is an offical SONY tool for converting WAV into there properitary .at3 format. if anyone has a libary that can handle this please let me know.
+# Dependancies
+
+Unless I'm that bad at using git, everything in here should be included already, let me know if I missed anything.
 
 - umdgenc is the offical UMD ISO builder from sony, it was the only UMD ISO builder i could find that would acturally work properly on the PSVita, (makes sense since its the offical tool) the reason most dont work is that they align sectors in whatever order. the PSP doesnt care, but PSPEmu on the PSVita does, im working on my own UMD builder to replace this.
 

@@ -230,7 +230,7 @@ namespace GMAssetCompiler
 		public static GMAssets LoadGMK(Stream _stream, string _name)
 		{
 			GMAssets gMAssets = null;
-			if (string.Compare(Path.GetExtension(_name), ".gmk", true) != 0)
+			if (string.Compare(Path.GetExtension(_name), ".gm81", true) != 0)
 			{
 				if (!CheckFor8_1(_stream))
 				{

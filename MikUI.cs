@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace ChovyUI
 {
-    public partial class ChovyUI : Form
+    public partial class MikUI : Form
     {
         bool wasClicked = false;
-        public ChovyUI()
+        public MikUI()
         {
             InitializeComponent();
             IconPath.Text = Path.Combine(Application.StartupPath, "IMG", "ICON0.PNG");
@@ -44,14 +44,14 @@ namespace ChovyUI
                 StartButton.Text =  key.GetValue("SCE_CTRL_START", StartButton.Text.ToUpper()).ToString();
 
                 string Runner = key.GetValue("RUNNER", "KAROSHI").ToString();
-                if(Runner == "GREENTECHPLUS")
+                if(Runner == "EXPERIMENTAL")
                 {
-                    GreenTechPlus.Checked = true;
+                    ExRunner.Checked = true;
                     Karoshi.Checked = false;
                 }
                 else
                 {
-                    GreenTechPlus.Checked = false;
+                    ExRunner.Checked = false;
                     Karoshi.Checked = true;
                 }
                 key.Close();
@@ -138,15 +138,15 @@ namespace ChovyUI
             }
             CopyDirTree(Path.Combine(Application.StartupPath, "RUNNER"), InputFolder);
 
-            if(GreenTechPlus.Checked)
+            if(ExRunner.Checked)
             {
-                File.Delete(Path.Combine(InputFolder, "PSP_GAME", "SYSDIR", "KAROSHI.BIN"));
-                File.Move(Path.Combine(InputFolder, "PSP_GAME", "SYSDIR", "GREENTECHPLUS.BIN"), Path.Combine(InputFolder, "PSP_GAME", "SYSDIR", "EBOOT.BIN"));
+                File.Delete(Path.Combine(InputFolder, "PSP_GAME", "SYSDIR", "KAROSHI.enc"));
+                File.Move(Path.Combine(InputFolder, "PSP_GAME", "SYSDIR", "EXPERIMENTAL.enc"), Path.Combine(InputFolder, "PSP_GAME", "SYSDIR", "EBOOT.BIN"));
             }
             else
             {
-                File.Delete(Path.Combine(InputFolder, "PSP_GAME", "SYSDIR", "GREENTECHPLUS.BIN"));
-                File.Move(Path.Combine(InputFolder, "PSP_GAME", "SYSDIR", "KAROSHI.BIN"), Path.Combine(InputFolder, "PSP_GAME", "SYSDIR", "EBOOT.BIN"));
+                File.Delete(Path.Combine(InputFolder, "PSP_GAME", "SYSDIR", "EXPERIMENTAL.enc"));
+                File.Move(Path.Combine(InputFolder, "PSP_GAME", "SYSDIR", "KAROSHI.enc"), Path.Combine(InputFolder, "PSP_GAME", "SYSDIR", "EBOOT.BIN"));
             }
 
             //Write to PARAM.SFO:
@@ -160,6 +160,9 @@ namespace ChovyUI
             //Copy icon and pic0:
             File.Copy(IconPath.Text, Path.Combine(InputFolder, "PSP_GAME", "ICON0.PNG"), true);
             File.Copy(PicPath.Text, Path.Combine(InputFolder, "PSP_GAME", "PIC0.PNG"), true);
+            string USRgames = Path.Combine(InputFolder, "PSP_GAME", "USRDIR", "games");
+            if (!Directory.Exists(USRgames))
+                Directory.CreateDirectory(USRgames);
             File.Copy(PicPath.Text, Path.Combine(InputFolder, "PSP_GAME", "USRDIR", "games","ICON0.PNG"), true);
 
             //Write game.ini
@@ -332,9 +335,9 @@ namespace ChovyUI
                 key.SetValue("SCE_CTRL_SELECT", SelectButton.Text.ToUpper());
                 key.SetValue("SCE_CTRL_START", StartButton.Text.ToUpper());
 
-                if(GreenTechPlus.Checked)
+                if(ExRunner.Checked)
                 {
-                    key.SetValue("RUNNER", "GREENTECHPLUS");
+                    key.SetValue("RUNNER", "EXPERIMENTAL");
                 }
                 else
                 {
