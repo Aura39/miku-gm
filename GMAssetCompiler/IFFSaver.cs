@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using UmdGen;
 
@@ -951,13 +952,14 @@ namespace GMAssetCompiler
 			WriteDataList(_strings, _s, _iff, delegate(IFFString _string, Stream __s, IFF __iff, long __index)
 			{
 				__s.PatchOffset(__index);
-				_s.WriteInteger(_string.String.Length);
+                byte[] bytes = Encoding.GetEncoding(1251).GetBytes(_string.String);
+				_s.WriteInteger(bytes.Length);
 				__iff.SetOffset(__s, _string, __s.Position);
-				for (int i = 0; i < _string.String.Length; i++)
-				{
-					_s.WriteByte((byte)_string.String[i]);
-				}
-				_s.WriteByte(0);
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    _s.WriteByte(bytes[i]);
+                }
+                _s.WriteByte(0);
 			});
 		}
 	}

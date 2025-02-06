@@ -240,7 +240,7 @@ namespace GMAssetCompiler
 
 		public static void WriteString(this Stream _s, string _str)
 		{
-			byte[] bytes = Encoding.UTF8.GetBytes(_str);
+			byte[] bytes = Encoding.GetEncoding(1251).GetBytes(_str);
 			_s.WriteInteger(bytes.Length);
 			for (int i = 0; i < bytes.Length; i++)
 			{

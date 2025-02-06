@@ -75,11 +75,7 @@
     <Compile Include="Flobbster.Windows.Forms\PropertySpecEventArgs.cs" />
     <Compile Include="Flobbster.Windows.Forms\PropertySpecEventHandler.cs" />
     <Compile Include="Flobbster.Windows.Forms\PropertyTable.cs" />
-    <Compile Include="GMAssetCompiler.Machines\Android.cs" />
-    <Compile Include="GMAssetCompiler.Machines\HTML5.cs" />
-    <Compile Include="GMAssetCompiler.Machines\IOS.cs" />
     <Compile Include="GMAssetCompiler.Machines\PSP.cs" />
-    <Compile Include="GMAssetCompiler.Machines\Symbian.cs" />
     <Compile Include="GMAssetCompiler.Machines\Windows.cs" />
     <Compile Include="GMAssetCompiler.Output\TextureOptionAttribute.cs" />
     <Compile Include="GMAssetCompiler.Output\TextureOptions.cs" />

@@ -243,30 +243,12 @@ namespace GMAssetCompiler
             _m = "psp"; // Allways PSP
 			switch (_m.ToLower())
 			{
-			case "nokia":
-			case "symbian":
-			case "qt":
-				MachineType = new Symbian();
-				break;
-			case "droid":
-			case "android":
-				MachineType = new Android();
-				break;
-			case "ipad":
-			case "iphone":
-			case "ipod":
-			case "ios":
-				MachineType = new IOS();
-				break;
 			case "psp":
 				MachineType = new PSP();
 				break;
 			case "windows":
 			case "win":
 				MachineType = new Windows();
-				break;
-			case "html5":
-				MachineType = new HTML5();
 				break;
 			}
 			if (MachineType != null)

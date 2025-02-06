@@ -86,7 +86,7 @@ namespace GMAssetCompiler.Machines
 		{
 			get
 			{
-				return eTexType.eDXT;
+				return eTexType.e4444;
 			}
 		}
 
@@ -94,7 +94,7 @@ namespace GMAssetCompiler.Machines
 		{
 			get
 			{
-				return eTexType.eDXT;
+				return eTexType.e4444;
 			}
 		}
 
