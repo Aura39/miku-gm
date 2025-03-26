@@ -59,11 +59,6 @@
             this.BrowseEXE = new System.Windows.Forms.Button();
             this.BuildISO = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
-            this.IconPath = new System.Windows.Forms.TextBox();
-            this.BrowseIcon = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
-            this.PicPath = new System.Windows.Forms.TextBox();
-            this.BrowsePic = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.TitleId = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -73,6 +68,7 @@
             this.ExRunner = new System.Windows.Forms.RadioButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label20 = new System.Windows.Forms.Label();
+            this.AdditionalFiles = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -434,69 +430,11 @@
             // 
             this.label15.AutoSize = true;
             this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.label15.Location = new System.Drawing.Point(287, 57);
+            this.label15.Location = new System.Drawing.Point(309, 57);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(54, 13);
+            this.label15.Size = new System.Drawing.Size(31, 13);
             this.label15.TabIndex = 8;
-            this.label15.Text = "icon0.png";
-            // 
-            // IconPath
-            // 
-            this.IconPath.BackColor = System.Drawing.Color.Black;
-            this.IconPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.IconPath.ForeColor = System.Drawing.Color.Aqua;
-            this.IconPath.Location = new System.Drawing.Point(347, 55);
-            this.IconPath.Name = "IconPath";
-            this.IconPath.Size = new System.Drawing.Size(259, 20);
-            this.IconPath.TabIndex = 9;
-            this.IconPath.Text = "IMG\\ICON0.PNG";
-            this.IconPath.TextChanged += new System.EventHandler(this.IconPath_TextChanged);
-            // 
-            // BrowseIcon
-            // 
-            this.BrowseIcon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BrowseIcon.ForeColor = System.Drawing.Color.Aqua;
-            this.BrowseIcon.Location = new System.Drawing.Point(612, 53);
-            this.BrowseIcon.Name = "BrowseIcon";
-            this.BrowseIcon.Size = new System.Drawing.Size(54, 21);
-            this.BrowseIcon.TabIndex = 10;
-            this.BrowseIcon.Text = "Browse";
-            this.BrowseIcon.UseVisualStyleBackColor = true;
-            this.BrowseIcon.Click += new System.EventHandler(this.BrowseIcon_Click);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.label16.Location = new System.Drawing.Point(296, 81);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(48, 13);
-            this.label16.TabIndex = 11;
-            this.label16.Text = "pic0.png";
-            // 
-            // PicPath
-            // 
-            this.PicPath.BackColor = System.Drawing.Color.Black;
-            this.PicPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicPath.ForeColor = System.Drawing.Color.Aqua;
-            this.PicPath.Location = new System.Drawing.Point(347, 79);
-            this.PicPath.Name = "PicPath";
-            this.PicPath.Size = new System.Drawing.Size(259, 20);
-            this.PicPath.TabIndex = 12;
-            this.PicPath.Text = "IMG\\PIC0.PNG";
-            this.PicPath.TextChanged += new System.EventHandler(this.PicPath_TextChanged);
-            // 
-            // BrowsePic
-            // 
-            this.BrowsePic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BrowsePic.ForeColor = System.Drawing.Color.Aqua;
-            this.BrowsePic.Location = new System.Drawing.Point(612, 78);
-            this.BrowsePic.Name = "BrowsePic";
-            this.BrowsePic.Size = new System.Drawing.Size(54, 21);
-            this.BrowsePic.TabIndex = 13;
-            this.BrowsePic.Text = "Browse";
-            this.BrowsePic.UseVisualStyleBackColor = true;
-            this.BrowsePic.Click += new System.EventHandler(this.BrowsePic_Click);
+            this.label15.Text = "Files:";
             // 
             // label17
             // 
@@ -525,7 +463,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.label18.Location = new System.Drawing.Point(314, 107);
+            this.label18.Location = new System.Drawing.Point(314, 147);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(30, 13);
             this.label18.TabIndex = 16;
@@ -536,11 +474,11 @@
             this.Title.BackColor = System.Drawing.Color.Black;
             this.Title.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Title.ForeColor = System.Drawing.Color.Aqua;
-            this.Title.Location = new System.Drawing.Point(347, 105);
+            this.Title.Location = new System.Drawing.Point(347, 145);
             this.Title.MaxLength = 64;
             this.Title.Multiline = true;
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(319, 60);
+            this.Title.Size = new System.Drawing.Size(319, 20);
             this.Title.TabIndex = 17;
             this.Title.Text = "GameMaker: PSP";
             // 
@@ -599,12 +537,29 @@
             this.label20.TabIndex = 22;
             this.label20.Text = "Original chovy-gm by LiEnby";
             // 
+            // AdditionalFiles
+            // 
+            this.AdditionalFiles.AllowDrop = true;
+            this.AdditionalFiles.BackColor = System.Drawing.Color.Black;
+            this.AdditionalFiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AdditionalFiles.ForeColor = System.Drawing.Color.Aqua;
+            this.AdditionalFiles.FormattingEnabled = true;
+            this.AdditionalFiles.Location = new System.Drawing.Point(347, 57);
+            this.AdditionalFiles.Name = "AdditionalFiles";
+            this.AdditionalFiles.Size = new System.Drawing.Size(319, 80);
+            this.AdditionalFiles.TabIndex = 23;
+            this.AdditionalFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.AdditionalFiles_DragDrop);
+            this.AdditionalFiles.DragOver += new System.Windows.Forms.DragEventHandler(this.AdditionalFiles_DragOver);
+            this.AdditionalFiles.DoubleClick += new System.EventHandler(this.AdditionalFiles_DoubleClick);
+            // 
             // MikUI
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(678, 504);
+            this.Controls.Add(this.AdditionalFiles);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.ExRunner);
             this.Controls.Add(this.label19);
@@ -614,11 +569,6 @@
             this.Controls.Add(this.label18);
             this.Controls.Add(this.TitleId);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.BrowsePic);
-            this.Controls.Add(this.PicPath);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.BrowseIcon);
-            this.Controls.Add(this.IconPath);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.BuildISO);
             this.Controls.Add(this.BrowseEXE);
@@ -672,11 +622,6 @@
         private System.Windows.Forms.Button BrowseEXE;
         private System.Windows.Forms.Button BuildISO;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox IconPath;
-        private System.Windows.Forms.Button BrowseIcon;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox PicPath;
-        private System.Windows.Forms.Button BrowsePic;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox TitleId;
         private System.Windows.Forms.Label label18;
@@ -686,5 +631,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.RadioButton ExRunner;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ListBox AdditionalFiles;
     }
 }

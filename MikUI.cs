@@ -13,8 +13,10 @@ namespace ChovyUI
         public MikUI()
         {
             InitializeComponent();
-            IconPath.Text = Path.Combine(Application.StartupPath, "IMG", "ICON0.PNG");
-            PicPath.Text = Path.Combine(Application.StartupPath, "IMG", "PIC0.PNG");
+            AdditionalFiles.Items.AddRange(new string[] {
+                Path.Combine(Application.StartupPath, "IMG", "ICON0.PNG"),
+                Path.Combine(Application.StartupPath, "IMG", "PIC0.PNG")
+            });
 
             try
             {
@@ -24,9 +26,6 @@ namespace ChovyUI
                 TitleId.Text = key.GetValue("TITLEID", TitleId.Text).ToString();
                 Title.Text = key.GetValue("TITLE", Title.Text).ToString();
                 GMPath.Text = key.GetValue("GMEXE", GMPath.Text).ToString();
-                IconPath.Text = key.GetValue("ICONPATH", IconPath.Text).ToString();
-                PicPath.Text = key.GetValue("PICPATH", PicPath.Text).ToString();
-
 
                 LBumper.Text = key.GetValue("SCE_CTRL_L", LBumper.Text.ToUpper()).ToString();
                 RBumper.Text = key.GetValue("SCE_CTRL_R", RBumper.Text.ToUpper()).ToString();
@@ -54,6 +53,13 @@ namespace ChovyUI
                     ExRunner.Checked = false;
                     Karoshi.Checked = true;
                 }
+                string FileValue = key.GetValue("FILES", string.Empty).ToString();
+                if (FileValue != string.Empty)
+                {
+                    AdditionalFiles.Items.Clear();
+                    string[] Files = FileValue.Split(new char[] { '?' }, StringSplitOptions.RemoveEmptyEntries);
+                    AdditionalFiles.Items.AddRange(Files);
+                }
                 key.Close();
             }
             catch (Exception) { };
@@ -61,28 +67,9 @@ namespace ChovyUI
 
         }
 
-        private void BrowseIcon_Click(object sender, EventArgs e)
+        private void AdditionalFiles_DoubleClick(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "PNG files (*.png)|*.png;";
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.RestoreDirectory = true;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                IconPath.Text = openFileDialog.FileName;
-            }
-        }
-
-        private void BrowsePic_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "PNG files (*.png)|*.png;";
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.RestoreDirectory = true;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                PicPath.Text = openFileDialog.FileName;
-            }
+            AdditionalFiles.Items.Remove(AdditionalFiles.SelectedItem);
         }
 
         private void Browse_Click(object sender, EventArgs e)
@@ -158,12 +145,16 @@ namespace ChovyUI
             sfo.Close();
 
             //Copy icon and pic0:
-            File.Copy(IconPath.Text, Path.Combine(InputFolder, "PSP_GAME", "ICON0.PNG"), true);
-            File.Copy(PicPath.Text, Path.Combine(InputFolder, "PSP_GAME", "PIC0.PNG"), true);
             string USRgames = Path.Combine(InputFolder, "PSP_GAME", "USRDIR", "games");
             if (!Directory.Exists(USRgames))
                 Directory.CreateDirectory(USRgames);
-            File.Copy(PicPath.Text, Path.Combine(InputFolder, "PSP_GAME", "USRDIR", "games","ICON0.PNG"), true);
+            foreach (string filepath in AdditionalFiles.Items)
+            {
+                string filename = Path.GetFileName(filepath);
+                File.Copy(filepath, Path.Combine(InputFolder, "PSP_GAME", Path.GetFileName(filename)), true);
+                if (filename == "ICON0.png")
+                    File.Copy(filepath, Path.Combine(InputFolder, "PSP_GAME", "USRDIR", "games", "ICON0.PNG"), true);
+            }
 
             //Write game.ini
             FileStream ini = new FileStream(Path.Combine(InputFolder, "PSP_GAME", "USRDIR","games","game.ini"), FileMode.OpenOrCreate, FileAccess.ReadWrite);
@@ -225,39 +216,13 @@ namespace ChovyUI
                 return;
             }
 
-            if (File.Exists(IconPath.Text))
+            foreach (string fname in AdditionalFiles.Items)
             {
-                BuildISO.Enabled = false;
-
-                try
+                if (!File.Exists(fname))
                 {
-                    Bitmap bmp = new Bitmap(IconPath.Text);
-                    if(bmp.Width != 144 || bmp.Height != 80)
-                    {
-                        return;
-                    }
-                }
-                catch(Exception)
-                {
+                    BuildISO.Enabled = false;
                     return;
                 }
-                BuildISO.Enabled = true;
-
-            }
-            else
-            {
-                BuildISO.Enabled = false;
-                return;
-            }
-
-            if (File.Exists(PicPath.Text))
-            {
-                BuildISO.Enabled = true;
-            }
-            else
-            {
-                BuildISO.Enabled = false;
-                return;
             }
 
             BuildISO.Enabled = false;
@@ -288,15 +253,7 @@ namespace ChovyUI
         {
             Check();
         }
-        private void IconPath_TextChanged(object sender, EventArgs e)
-        {
-            Check();
-        }
 
-        private void PicPath_TextChanged(object sender, EventArgs e)
-        {
-            Check();
-        }
         private void TitleId_TextChanged(object sender, EventArgs e)
         {
             int Cursor = TitleId.SelectionStart;
@@ -316,9 +273,12 @@ namespace ChovyUI
                 key.SetValue("TITLEID", TitleId.Text);
                 key.SetValue("TITLE", Title.Text);
                 key.SetValue("GMEXE", GMPath.Text);
-                key.SetValue("ICONPATH", IconPath.Text);
-                key.SetValue("PICPATH", PicPath.Text);
-                
+                string FileValue = string.Empty;
+                foreach (string fpath in AdditionalFiles.Items)
+                {
+                    FileValue += fpath + "?";
+                }
+                key.SetValue("FILES", FileValue);
 
                 key.SetValue("SCE_CTRL_L", LBumper.Text.ToUpper());
                 key.SetValue("SCE_CTRL_R", RBumper.Text.ToUpper());
@@ -348,6 +308,20 @@ namespace ChovyUI
             catch (Exception)
             {
                 MessageBox.Show("Failed to save settings to registry.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void AdditionalFiles_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void AdditionalFiles_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string path in data)
+            {
+                AdditionalFiles.Items.Add(path);
             }
         }
     }
