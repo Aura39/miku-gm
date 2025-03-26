@@ -544,6 +544,7 @@
             this.AdditionalFiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.AdditionalFiles.ForeColor = System.Drawing.Color.Aqua;
             this.AdditionalFiles.FormattingEnabled = true;
+            this.AdditionalFiles.HorizontalScrollbar = true;
             this.AdditionalFiles.Location = new System.Drawing.Point(347, 57);
             this.AdditionalFiles.Name = "AdditionalFiles";
             this.AdditionalFiles.Size = new System.Drawing.Size(319, 80);
